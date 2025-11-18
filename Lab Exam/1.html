@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1 style="color: mediumaquamarine;">Event Registration Form</h1>
+        <div>
+            <label for="name">Name:</label>
+        </div>
+        <div>
+            <input type="text" id="name" name="name"><br>
+            <span id="nameerr" style="color:red;"></span>
+    </div>
+    <div>
+        <div>
+            <label for="email">Email:</label>
+        </div>
+        <div>
+            <input type="email" id="email" name="email"><br>
+            <span id="emailerr" style="color:red;"></span>
+ 
+        </div>
+    </div>
+    <div>
+        <div>
+            <label for ="company">Company:</label>
+        </div>
+        <div>
+            <input type="text" id="company" name="company"><br>
+            <span id="companyerr" style="color:red;"></span>
+    </div>
+    <div>
+        <label for="attendance type">Attendance type:</label>
+        <input type="radio" id="in-person" name="attendance type" value="in-person">
+        <label for="in-person">In-Person</label>
+        <input type="radio" id="virtual" name="attendance type" value="virtual">
+        <label for="virtual">Virtual</label>
+        <br>
+        <span id="attendanceerr" style="color:red;"></span>
+    </div>
+    <div>
+        <br>
+ 
+        <button onclick="handlevalidation()">Register</button>
+ 
+ 
+    </div>
+    <div>
+        <br>
+        <button onclick="showeventanalytics()">Show event Analytics</button>
+    </div>
+    <br>
+ 
+    <div id="eventanalytics" style="color: springgreen;">
+       
+    </div>
+       
+   
+    </div>
+ 
+ 
+   
+</body>
+<script>
+    function handlevalidation() {
+        const name = document.getElementById('name').value;
+        const nameerr= document.getElementById('nameerr');
+        if(name===""){
+            nameerr.innerHTML="Please enter your name";
+            ;
+        }else if(name.length<6){
+            nameerr.innerHTML="Name must be at least 6 characters long";
+        }else if(name.length>100){
+            nameerr.innerHTML="Name must be less than 100 characters long";
+        }else{
+            nameerr.innerHTML="";
+        }
+       const email = document.getElementById('email').value;
+       const emailerr= document.getElementById('emailerr');
+         const emailpattern= /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+        if(email===""){
+            emailerr.innerHTML="Please enter your email";
+        }else if(!email.match(emailpattern)){
+            emailerr.innerHTML="Please enter a valid email address";
+        }else{  
+            emailerr.innerHTML="";
+        }
+        const company = document.getElementById('company').value;
+        const companyerr= document.getElementById('companyerr');
+        if(company.length>100){
+            companyerr.innerHTML="Company name must be less than 100 characters long";
+ 
+ 
+    }else{
+        companyerr.innerHTML="";
+    }
+    const inperson = document.getElementById('in-person');
+    const virtual = document.getElementById('virtual');
+    const attendanceerr= document.getElementById('attendanceerr');
+    if(!inperson.checked && !virtual.checked){
+        attendanceerr.innerHTML="Please select an attendance type";
+    }else{
+        attendanceerr.innerHTML="";
+    }
+ 
+    if(nameerr.innerHTML==="" && emailerr.innerHTML==="" && companyerr.innerHTML==="" && attendanceerr.innerHTML===""){
+        alert("Registration successful!");
+    }
+}
+function showeventanalytics(){
+    count =0;
+    count1=0;
+    const inperson = document.getElementById('in-person');
+    const virtual = document.getElementById('virtual');
+    const inner = document.getElementById('eventanalytics');
+    if(inperson.checked){
+        count +=1;
+    }
+ 
+    if(virtual.checked){
+        count1 +=1;
+    }
+    eventanalytics.innerHTML="Total Registrations inPerson: " + count ;
+    eventanalytics.innerHTML +="<br>Total Registrations Virtual: " + count1;
+ 
+   
+}
+ 
+</script>
+</html>
